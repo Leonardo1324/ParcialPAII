@@ -16,21 +16,23 @@ private apiUrl = 'http://localhost:3000/appointments';
   }
 
   getAppointment(id: string): Observable<Appointment> {
-    //TODO
+    return this.http.get<Appointment>(`${this.apiUrl}/${id}`);
   }
 
   createAppointment(appointment: Appointment): Observable<Appointment> {
     // Generate a string ID (e.g., UUID or timestamp)
+    
     const newId = Date.now().toString();
     const payload = { ...appointment, id: newId };
+    
     return this.http.post<Appointment>(this.apiUrl, payload);
   }
 
   updateAppointment(appointment: Appointment): Observable<Appointment> {
-    //TODO
+    return this.http.put<Appointment>(`${this.apiUrl}/${appointment.id}`, appointment);
   }
 
   deleteAppointment(id: string): Observable<void> {
-    //TODO
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

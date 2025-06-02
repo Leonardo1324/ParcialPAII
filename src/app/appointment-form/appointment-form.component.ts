@@ -92,7 +92,16 @@ export class AppointmentFormComponent {
           }
         });
       } else {
-        //TODO
+        this.appointmentService.createAppointment(appointment).subscribe({
+          next: () => {
+            this.router.navigate(['/list']);
+            this.errorMessage = null;
+          },
+          error: (err) => {
+            this.errorMessage = 'Error al crear el turno';
+            console.error('Error creating appointment:', err);
+          }
+        });
       }
     }
   }
